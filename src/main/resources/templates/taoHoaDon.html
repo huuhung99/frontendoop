@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tạo hóa đơn</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div align="center">
+        <form method="POST" th:object="${dt}">
+            <table>
+                <tr>
+                    <td>Chọn điện thoại:</td>
+                    <td>
+                        <select th:field="*{maDienThoai}">
+                            <option th:each="dt : ${dienThoais}"
+                                    th:value="${dt.maDienThoai}"
+                                    th:utext="${dt.tenDienThoai}"/>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <br> <input type="submit" value="Thêm vào hóa đơn" class="btn btn-success" />
+        </form>
+    </div>
+    <div align="center">
+        <h2>Hóa đơn</h2>
+        <br>
+        <form method="POST" th:object="${hd}" th:action="@{/hoadon/them}">
+            <table border="1" cellpadding="5">
+                <tr class="text-center">
+                    <th>ID</th>
+                    <th>Tên điện thoại</th>
+                    <th>Hãng sản xuất</th>
+                    <th>Model</th>
+                    <th>Số lượng</th>
+                </tr>
+                <tr th:each="item : ${hd.item}">
+                    <td th:utext="${item.id}" class="text-center"></td>
+                    <td th:utext="${item.dienThoai.tenDienThoai}" class="text-left"></td>
+                    <td th:utext="${item.dienThoai.hangSanXuat}" class="text-center"></td>
+                    <td th:utext="${item.dienThoai.model}" class="text-center"></td>
+                    <td th:utext="${item.soLuong}" class="text-center"></td>
+                </tr>
+            </table>
+            <br> <input type="submit" value="Tạo" class="btn btn-success" />
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Quản lý điện thoại</title>
+<link rel="stylesheet"
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+</head>
+<body>
+	<div align="center">
+		<h1>Quản lý điện thoại</h1>
+		<h2>
+			<a th:href="@{/dienthoai/them}" class="btn btn-warning">Thêm điện thoại</a>
+			<a th:href="@{/}" class="btn btn-warning">Quản lý khách hàng</a>
+			<a th:href="@{/hoadon}" class="btn btn-warning">Xem hóa đơn</a>
+		</h2>
+		<hr>
+	</div>
+	<div align="center">
+		<h2>Danh sách điện thoại</h2>
+		<br>
+		<form method="get" th:action="@{/dienthoai/tim}">
+			<input type="text" placeholder="Tìm kiếm..." name="keyword">
+			<input type="submit" class="btn btn-success" value="Tìm kiếm" />
+		</form>
+		<br>
+		<table border="1" cellpadding="5">
+			<tr class="text-center">
+				<th>ID</th>
+				<th>Tên điện thoại</th>
+				<th>hãng sản xuất</th>
+				<th>model</th>
+				<th>Đơn giá</th>
+				<th>Sửa/Xóa</th>
+			</tr>
+			<tr th:each="dt : ${dienThoais}">
+				<td th:utext="${dt.maDienThoai}" class="text-center"></td>
+				<td th:utext="${dt.tenDienThoai}" class="text-left"></td>
+				<td th:utext="${dt.hangSanXuat}" class="text-center"></td>
+				<td th:utext="${dt.model}" class="text-center"></td>
+				<td th:utext="${#numbers.formatDecimal(dt.donGia, 1, 2, 'COMMA')}" class="text-center"></td>
+				<td><a th:href="@{'/dienthoai/sua/' + ${dt.maDienThoai}}"
+					class="btn btn-success">Sửa</a> &nbsp;&nbsp;&nbsp;&nbsp; <a
+					th:href="@{'/dienthoai/xoa/' + ${dt.maDienThoai}}"
+					class="btn btn-danger">Xóa</a></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

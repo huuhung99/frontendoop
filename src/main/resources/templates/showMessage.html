@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <title>Message</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+</head>
+<body>
+<h2>
+    <div>
+        <a th:href="@{/}" class="btn btn-warning">Quản lý khách hàng</a>
+        <a th:href="@{/dienthoai}" class="btn btn-warning">Quản lý điện thoại</a>
+        <a th:href="@{/hoadon}" class="btn btn-warning">Xem hóa đơn</a>
+    </div>
+</h2>
+<script th:inline="javascript">
+    var message = [[${message}]];
+    alert(message);
+</script>
+</body>
+</html>

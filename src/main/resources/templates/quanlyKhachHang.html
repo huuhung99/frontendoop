@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Quản lý khách hàng</title>
+<link rel="stylesheet"
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+</head>
+<body>
+	<div align="center">
+		<h1>Quản lý khách hàng</h1>
+		<h2>
+			<a th:href="@{/them}" class="btn btn-warning">Thêm Khách Hàng</a>
+			<a th:href="@{/dienthoai}" class="btn btn-warning">Quản lý điện thoại</a>
+			<a th:href="@{/hoadon}" class="btn btn-warning">Danh sách hoa đơn</a>
+		</h2>
+		<hr>
+	</div>
+	<div align="center">
+		<h2>Danh sách Khách Hàng</h2>
+		<br>
+		<form method="get" th:action="@{/tim}">
+			<input type="text" placeholder="Tìm kiếm..." name="keyword">
+			<input type="submit" class="btn btn-success" value="Tìm kiếm" />
+		</form>
+		<br>
+		<table border="1" cellpadding="5">
+			<tr class="text-center">
+				<th>ID</th>
+				<th>Tên</th>
+				<th>Địa chỉ</th>
+				<th>Nhóm khách hàng</th>
+				<th>Sửa/Xóa</th>
+				<th>Thêm hóa đơn</th>
+				<th>Thống kê</th>
+			</tr>
+			<tr th:each="kh : ${khachHangs}">
+				<td th:utext="${kh.maKhachHang}" class="text-center"></td>
+				<td th:utext="${kh.hoTen}" class="text-left"></td>
+				<td th:utext="${kh.diaChi}" class="text-center"></td>
+				<td th:utext="${kh.nhomKhachHang}" class="text-center"></td>
+				<td><a th:href="@{'/sua/' + ${kh.maKhachHang}}"
+					class="btn btn-success">Sửa</a> &nbsp;&nbsp;&nbsp;&nbsp; <a
+					th:href="@{'/xoa/' + ${kh.maKhachHang}}"
+					class="btn btn-danger">Xóa</a></td>
+				<td><a th:href="@{'/hoadon/' + ${kh.maKhachHang}}"
+					class="btn btn-success">Thêm HĐ</a> &nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td><a th:href="@{'/hoadon/thongke/' + ${kh.maKhachHang}}"
+					class="btn btn-success">TK</a> &nbsp;&nbsp;&nbsp;&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
